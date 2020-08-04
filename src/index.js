@@ -11,7 +11,7 @@ function createTask(event) {
   const priorityOption = document.querySelector('#priority-select');
   const selectedOption = priorityOption[priorityOption.selectedIndex];
 
-  const newTask = craeteTaskLi(taskName, selectedOption);
+  const newTask = createTaskLi(taskName, selectedOption);
   const delButton = createDelButton(taskName);
 
   newTask.append(delButton);
@@ -20,7 +20,7 @@ function createTask(event) {
   event.target.reset();
 };
 
-function craeteTaskLi(taskName, priorityOption) {
+function createTaskLi(taskName, priorityOption) {
   const newTask = document.createElement('li');
   newTask.innerText = taskName
   newTask.style.backgroundColor = priorityOption.dataset['color'];
