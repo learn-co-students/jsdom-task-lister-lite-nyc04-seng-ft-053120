@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const formEl = document.querySelector('#create-task-form');
-
-  formEl.addEventListener("submit", createTask);
+  const createTaskForm = document.querySelector('#create-task-form');
+  const sortTaskForm = document.querySelector('#sort-tasks');
+  createTaskForm.addEventListener("submit", createTask);
+  sortTaskForm.addEventListener("submit", sortTasks);
 });
 
 function createTask(event) {
@@ -43,4 +44,43 @@ function addTaskLi(taskLi) {
 
 function removeParentEl(event) {
   event.target.parentElement.remove();
+}
+
+function sortTasks(e) {
+  e.preventDefault();
+  const tasksUl = document.querySelector('ul#tasks');
+  const selectEl = document.querySelector('#sort-select');
+  const option = selectEl.options[selectEl.selectedIndex].value;
+  let tasks = getTaskLists();
+
+  if (option == "asc") {
+    tasks = tasks.sort(tasksSortAsc);
+  } else {
+    tasks = tasks.sort(tasksSortDsc);
+  }
+
+  tasksUl.innerHTML = "";
+  tasks.forEach(li => tasksUl.appendChild(li));
+}
+
+function getTaskLists() {
+  return Array.from(document.querySelectorAll('ul#tasks li'));
+}
+
+function tasksSortDsc(elOne, elTwo) {
+  if (elOne.dataset["priority"] > elTwo.dataset["priority"]) {
+    return 1;
+  } else if (elOne.dataset["priority"] < elTwo.dataset["priority"]) {
+    return -1;
+  }
+  return 0;
+}
+
+function tasksSortAsc(elOne, elTwo) {
+  if (elOne.dataset["priority"] > elTwo.dataset["priority"]) {
+    return -1;
+  } else if (elOne.dataset["priority"] < elTwo.dataset["priority"]) {
+    return 1;
+  }
+  return 0;
 }
