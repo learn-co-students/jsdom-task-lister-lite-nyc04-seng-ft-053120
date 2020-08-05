@@ -24,14 +24,17 @@ document.addEventListener("DOMContentLoaded", (evt) => {
 
     //creating a blank button 
     let blankButton = document.createElement("button")
+
     //inner-text = "x"
     blankButton.innerText = "x"
+
     //add the button to the task that allows us to delete the item
     blankListItem.append(blankButton)
-    //when a user clicks the button it removes the task.
+
+    //when a user clicks the button it remove the task.
     blankButton.addEventListener("click", function(evt){
-    evt.preventDefault()
-    blankListItem.remove()
+      evt.preventDefault()
+      blankListItem.remove()
     })
 
   })
